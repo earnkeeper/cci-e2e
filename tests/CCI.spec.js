@@ -60,6 +60,30 @@ test("community", async ({ page }) => {
   await expect(page).toHaveURL("https://cci.gnarus.io/groups/");
 });
 
+test('forums', async ({ page }) => {
+  await page.goto('https://cci.gnarus.io/forums/', { timeout: 60000 });
+  await page.getByRole('heading', { name: 'Forums' })
+  await page.getByText('Public Forum').click();
+  await page.getByRole('heading', { name: 'All Discussions' })
+  await page.locator('#bbp-forum-67 div').filter({ hasText: 'Alex Griffin Forum Example Discussion Alex Griffin replied 10 months ago 1 Membe' }).first()
+  await page.locator('#bbp-forum-67 div').filter({ hasText: 'Jessica Sanders Forum Sample Discussion Jessica Sanders replied 10 months ago 1 ' }).first()
+  await page.getByRole('link', { name: 'info@crewsclimb.com' })
+
+  await expect(page).toHaveURL('https://cci.gnarus.io/forums/forum/public-forum/');
+});
+
+test.only('search', async ({ page }) => {
+  await page.waitForLoadState();
+  await page.goto('https://cci.gnarus.io/forums/');
+  
+  await page.getByPlaceholder('Search forums...').click()
+  await page.waitForLoadState();
+  await page.getByRole('textbox').fill('example value');
+  await page.getByRole('textbox').clear();
+  
+  await expect(page).toHaveURL('https://cci.gnarus.io/forums/');
+});
+
 
 test('Test ',async ({page})=>{
 
@@ -178,7 +202,7 @@ test("name,email,send message", async ({ page }) => {
   await expect(await page.getByText("Get in touch!")).toBeDefined();
 });
 
-test.only("publish", async ({ page }) => {
+test("publish", async ({ page }) => {
   await page.goto("https://cci.gnarus.io/");
   await page.waitForLoadState();
   await page.getByRole("link", { name: "Back to Work" }).click();
@@ -186,7 +210,18 @@ test.only("publish", async ({ page }) => {
     .getByRole("heading", { name: "Take Flight" })
     .getByRole("link", { name: "Take Flight" })
     .click();
-  await page.getByRole("link", { name: "Permalink to Preparation" }).click();
+  await page.getByRole("link", { name: "Permalink to Preparation" })
   await page.waitForLoadState();
   await page.getByRole("paragraph").filter({ hasText: "Publish" });
 });
+
+test.only('',async ({ page}) => {
+  await page.goto('https://cci.gnarus.io/forums/')
+  await page.locator('section').filter({ hasText: 'info@crewsclimb.com Facebook Linkedin Instagram info@crewsclimb.com' }).getByRole('img', { name: 'Crews Climb International Logo 1080px' })
+  await page.locator('a').filter({ hasText: 'Facebook' })
+  await page.locator('a').filter({ hasText: 'Linkedin' })
+  await page.locator('a').filter({ hasText: 'Instagram' })
+
+  
+
+})
