@@ -1,7 +1,8 @@
 const { test, expect } = require("@playwright/test");
 
 test("logo", async ({ page }) => {
-  await page.goto("https://cci.gnarus.io/");
+  await page.waitForLoadState()
+  await page.goto('https://cci.gnarus.io/', { timeout: 60000 });
 
   await page.getByRole('link', { name: 'Crews Climb International Logo 1080px' })
 
@@ -72,7 +73,7 @@ test('forums', async ({ page }) => {
   await expect(page).toHaveURL('https://cci.gnarus.io/forums/forum/public-forum/');
 });
 
-test.only('search', async ({ page }) => {
+test('search', async ({ page }) => {
   await page.waitForLoadState();
   await page.goto('https://cci.gnarus.io/forums/');
   
@@ -124,10 +125,21 @@ test("blog link", async ({ page }) => {
 
 test("get search link", async ({ page }) => {
   await page.goto("https://cci.gnarus.io/");
+  await page.https
 
   await page.getByRole("link", { name: " " }).click();
   await page.getByPlaceholder("Search...");
   await page.getByRole("link", { name: "" });
+});
+
+test('sign in', async ({ page }) => {
+  await page.goto("https://cci.gnarus.io/");
+
+  await page.getByRole('link', { name: 'Sign in' }).click();
+  await page.getByRole('heading', { name: 'Sign in' })
+  await page.getByRole('link', { name: 'Create an Account' })
+
+  await expect(await page.getByText("Sign in")).toBeDefined();
 });
 
 test("Value Proposition Here", async ({ page }) => {
@@ -156,6 +168,15 @@ test("17% of pilots are furloughed", async ({ page }) => {
   await expect(
     await page.getByText("17% of pilots are furloughed")
   ).toBeVisible();
+});
+
+test("10% of pilots of pilots are in non-flying roles", async ({ page }) => {
+  await page.goto("https://cci.gnarus.io/");
+
+  await page.getByText("10% of pilots of pilots are in non-flying roles");
+
+  await page.waitForLoadState()
+  await expect(await page.getByText("10% of pilots of pilots are in non-flying roles")).toBeDefined();
 });
 
 test("blog", async ({ page }) => {
@@ -215,13 +236,13 @@ test("publish", async ({ page }) => {
   await page.getByRole("paragraph").filter({ hasText: "Publish" });
 });
 
-test.only('',async ({ page}) => {
+test('socials',async ({ page}) => {
   await page.goto('https://cci.gnarus.io/forums/')
   await page.locator('section').filter({ hasText: 'info@crewsclimb.com Facebook Linkedin Instagram info@crewsclimb.com' }).getByRole('img', { name: 'Crews Climb International Logo 1080px' })
   await page.locator('a').filter({ hasText: 'Facebook' })
   await page.locator('a').filter({ hasText: 'Linkedin' })
   await page.locator('a').filter({ hasText: 'Instagram' })
-
+  
   
 
 })
