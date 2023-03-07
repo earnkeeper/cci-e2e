@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "install-browsers": "playwright install",
+    "pretest": "playwright install",
     "test": "playwright test"
   },
   "repository": {
