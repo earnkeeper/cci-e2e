@@ -1,5 +1,5 @@
 const { test, expect } = require("@playwright/test");
-import { PlaywrightDevPage } from "./CCIURL..spec";
+import { PlaywrightDevPage } from "../CCIURL..spec";
 
 test("publish", async ({ page }) => {
   const playwrightDev = new PlaywrightDevPage(page)

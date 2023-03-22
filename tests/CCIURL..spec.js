@@ -12,18 +12,19 @@ exports.PlaywrightDevPage = class PlaywrightDevPage {
   }
 
   async goto() {
-    //await this.page.waitForLoadState();
-    await this.page.goto('https://cci.gnarus.io/');
+    await this.page.waitForLoadState();
+    await this.page.goto('https://cci.gnarus.io/' , { timeout: 30000 });
     
   }
   
- async getStarted() {
-    await this.getStartedLink.first().click();
-    await expect(this.gettingStartedHeader).toBeVisible();
-  }
+  
+ //async getStarted() {
+   // await this.getStartedLink.first().click();
+    //await expect(this.gettingStartedHeader).toBeVisible();
+  //}
 
-  async pageObjectModel() {
+  //async pageObjectModel() {
     //await this.getStarted();
     //await this.pomLink.click();
   }
-}
+//}

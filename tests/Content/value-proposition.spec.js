@@ -1,5 +1,5 @@
 const { test, expect } = require("@playwright/test");
-import { PlaywrightDevPage } from "./CCIURL..spec";
+import { PlaywrightDevPage } from "../CCIURL..spec";
 
 test("Value Proposition Here", async ({ page }) => {
   test.setTimeout(45000);
