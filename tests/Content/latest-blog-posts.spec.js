@@ -1,10 +1,9 @@
 const { test, expect } = require("@playwright/test");
-import { PlaywrightDevPage } from "./CCIURL..spec";
+import { PlaywrightDevPage } from "../CCIURL..spec";
 
-test("blog Posts", async ({ page }) => {
-    test.setTimeout(45000);
-    const playwrightDev = new PlaywrightDevPage(page)
-    await playwrightDev.goto();
+test("communitty", async ({ page }) => {
+    const playwrightDev = new PlaywrightDevPage(page);
+    await playwrightDev.goto()
 
     page.getByRole('heading', { name: 'Latest Blog Posts' })
     page.getByRole('link', { name: 'Preparation' })
